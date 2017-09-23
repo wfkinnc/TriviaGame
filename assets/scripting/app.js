@@ -14,15 +14,12 @@ function setClickItems() {
 //function(){
 
 var array1 = [];
-array1[0]	= ["who is mirko",["ta", "race drver0", "bullfigher"],0];
-array1[1] 	= ["who is howard",["ta", "race drver1", "bullfigher"],0];
-array1[2]	= ["who is donald",["ta", "race drver2", "bullfigher"],0];
-// array1[3] 	= ["who is mickey",["ta", "race drver", "bullfigher"],0];
-// array1[4]	= ["who is pluto",["ta", "race drver", "bullfigher"],0];
-// array1[5] 	= ["who is porky",["ta", "race drver", "bullfigher"],0];
-// array1[6]	= ["who is petunia",["ta", "race drver", "bullfigher"],0];
-// array1[7] 	= ["who is bugs",["ta", "race drver", "bullfigher"],0];
-
+array1[0]	= ["Who is Donald Duck?",["Disney fowl", "Bank Robber", "Race Driver"],0];
+array1[1] 	= ["Where is the moon?",["Near Uranus", "In orbit around the earth"], 1];
+array1[2]	= ["How many gallons in a barrel of oil?",["9", "400", "55"],2];
+array1[3] 	= ["Red or White?",["Red", "White"],0];
+array1[4]	= ["Favorite Beer",["Bud Light", "Negra Modelo", "PBR"],1];
+array1[5] 	= ["How many licks to get to the center of a tootsi pop?",["1", "2", "3"],2];
 
 //   	alert($(this).data("answer"));
 //   });
@@ -34,11 +31,15 @@ var numRights = 0;
 var numWrongs = 0;
 var gameGoing = true;
 var globalQuestionNum = 0;
-
+// timing variables
+var maxLength = 8;
 // fcn checkAnswer
 // 1. increments counters for right and wrong answers
 // 2. pauses the game.
 // 
+
+// sets teh diplay of the max length
+$("#maxLength").html(maxLength);
 function checkAnswer(){
 	var restartID ;
 	console.log("checking answer");
@@ -65,7 +66,7 @@ function checkAnswer(){
 
 var timeController = {
 
-	time: 8,
+	time: maxLength,
 	numTurns: 0,
 
 	start: function(){
@@ -76,9 +77,9 @@ var timeController = {
 		// after n seconds, runs setTimeout which runs timeout. Timemout clears the intervalID from
 		// the setinterval  which 
 		if (gameGoing){
-			timeController.time=8;
+			timeController.time=maxLength;
 			intervalID = setInterval(timeController.timeCount,1000);
-			timeOutID = setTimeout(timeController.timeOut, 8000);
+			timeOutID = setTimeout(timeController.timeOut, maxLength * 1000);
 		}
 		// starts the timeing contorls.
 		timeController.controlGame();
@@ -99,6 +100,7 @@ var timeController = {
 
 			}
 			$("#numQuestion").html(timeController.numTurns  + 1);
+			$("#maxQuestions").html(array1.length);
 			// call displayInfo which shows the quesions and sanswers and sets the correct #.
 		 	displayInfo(timeController.numTurns);
 			timeController.numTurns++;
